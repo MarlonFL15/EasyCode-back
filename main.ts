@@ -1,5 +1,5 @@
 import {Server} from './server/server'
-import {perguntasRouter} from './pergunta/pergunta.router'
+import {perguntasRouter} from './questao/questao.router'
 import {respostaRouter} from './resposta/respostas.router'
 import {usuarioRouter} from './Usuario/usuario.router'
 const server = new Server()

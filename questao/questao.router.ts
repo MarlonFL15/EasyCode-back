@@ -1,7 +1,7 @@
 import {Router} from '../common/router'
 import * as restify from 'restify'
 import connection from '../common/bd/connection'
-import Pergunta from './pergunta.models'
+import Pergunta from './questao.models'
 
 class PerguntaRouter extends Router{
     applyRoutes(application: restify.Server){

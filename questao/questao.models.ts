@@ -2,7 +2,7 @@ import connection from '../common/bd/connection'
 
 export default class Pergunta {
     static index(connection) {
-        const query = `SELECT * FROM Pergunta WHERE tipo = 'P';`;
+        const query = `SELECT * FROM questao`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) reject(err);
@@ -11,7 +11,7 @@ export default class Pergunta {
         });
     }
     static indexById(connection, id) {
-        const query = `SELECT * FROM Pergunta WHERE id = ${id};`;
+        const query = `SELECT * FROM questao WHERE id = ${id};`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) reject(err);
@@ -29,7 +29,7 @@ export default class Pergunta {
         });
     }
     static show(connection, id) {
-        const query = `SELECT * FROM Pergunta WHERE id = ${id};`;
+        const query = `SELECT * FROM questao WHERE id = ${id};`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, results, fields) => {
                 if (err) {

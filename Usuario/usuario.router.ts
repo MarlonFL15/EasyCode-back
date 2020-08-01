@@ -31,7 +31,21 @@ class UsuarioRouter extends Router{
             })
         }),
         application.post('/getUserEmail', (req,resp,next)=>{
+            console.log('chamou esse email')
             Usuario.getUserByEmail(connection,req.body).then(result=>{
+                console.log(typeof(result))
+                if(result == 0){
+                    resp.json({result:false})
+                }
+                else
+                    resp.json({result:true})
+                
+                return next()
+            })
+        }),
+        application.post('/getUserGoogle', (req,resp,next)=>{
+            console.log('chamou esse email pelo google')
+            Usuario.getUseByGoogle(connection,req.body).then(result=>{
                 console.log(typeof(result))
                 if(result == 0){
                     resp.json({result:false})

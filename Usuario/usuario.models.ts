@@ -28,7 +28,32 @@ export default class usuario {
         });
     }
     static add(connection,usuario) {
-        const query = `INSERT INTO usuario(email, senha, nome) VALUES('${usuario.email}', '${usuario.senha}', '${usuario.nome}')`;
+        console.log('chegou no de adicionar')
+        let query='';
+        let foto = usuario.foto == null ? null:`'${usuario.foto}'` 
+        let pathFoto = usuario.pathFoto == null ? null:`'${usuario.pathFoto}'` 
+        let senha = usuario.senha == null ? null:`'${usuario.senha}'` 
+        
+        query = `INSERT INTO usuario(email, senha, nome, foto, pathFoto, google) VALUES(
+            '${usuario.email}', 
+            ${senha}, 
+            '${usuario.nome}', 
+            ${foto} ,
+            ${pathFoto}, 
+            ${usuario.google})`;
+        console.log(usuario)
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, result) => {
+                if (err) {
+                    console.log(err)
+                    reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
+    static getUserByEmail(connection,usuario) {
+        const query = `SELECT * FROM usuario WHERE email='${usuario.email}'`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
@@ -39,9 +64,9 @@ export default class usuario {
             });
         });
     }
-    static getUserByEmail(connection,usuario) {
-        console.log(usuario)
-        const query = `SELECT * FROM usuario WHERE email='${usuario.email}'`;
+
+    static getUseByGoogle(connection, usuario) {
+        const query = `SELECT * FROM usuario WHERE email='${usuario.email}' and senha=null`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
