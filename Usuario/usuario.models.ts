@@ -2,7 +2,7 @@ import { isDate } from 'util';
 
 export default class usuario {
     static index(connection) {
-        const query = 'SELECT * FROM usuario;';
+        const query = 'SELECT nome, email, senha FROM usuario;';
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
@@ -28,7 +28,6 @@ export default class usuario {
         });
     }
     static add(connection,usuario) {
-        console.log('chegou no de adicionar')
         let query='';
         let foto = usuario.foto == null ? null:`'${usuario.foto}'` 
         let pathFoto = usuario.pathFoto == null ? null:`'${usuario.pathFoto}'` 

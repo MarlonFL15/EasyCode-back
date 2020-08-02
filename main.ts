@@ -1,10 +1,11 @@
 import {Server} from './server/server'
-import {perguntasRouter} from './questao/questao.router'
-import {respostaRouter} from './resposta/respostas.router'
+import {perguntasRouter} from './Questao/questao.router'
+import {respostaRouter} from './Resposta/respostas.router'
 import {usuarioRouter} from './Usuario/usuario.router'
+import {conquistaRouter} from './Conquista/conquista.router'
 const server = new Server()
 
-server.bootstrap([perguntasRouter,respostaRouter, usuarioRouter]).then(server=>{
+server.bootstrap([conquistaRouter,perguntasRouter,respostaRouter, usuarioRouter]).then(server=>{
     console.log('Server is linstening', server.application.address())
     console.log('foi')
 }).catch(error=>{

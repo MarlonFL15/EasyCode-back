@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/mongoose": "5.7.8",
+    "@types/readable-stream": "2.3.5",
     "sequelize-cli": "^5.5.1"
   }
 }

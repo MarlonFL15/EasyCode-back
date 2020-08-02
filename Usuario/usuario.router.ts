@@ -18,7 +18,7 @@ class UsuarioRouter extends Router{
             })
         }),
         application.post('/addUser', (req,resp,next)=>{
-            if(Usuario.login(connection, req.body))
+            // if(Usuario.login(connection, req.body))
             Usuario.add(connection,req.body).then(result=>{
                 resp.json(result)
                 return next()
@@ -31,7 +31,6 @@ class UsuarioRouter extends Router{
             })
         }),
         application.post('/getUserEmail', (req,resp,next)=>{
-            console.log('chamou esse email')
             Usuario.getUserByEmail(connection,req.body).then(result=>{
                 console.log(typeof(result))
                 if(result == 0){
@@ -44,7 +43,6 @@ class UsuarioRouter extends Router{
             })
         }),
         application.post('/getUserGoogle', (req,resp,next)=>{
-            console.log('chamou esse email pelo google')
             Usuario.getUseByGoogle(connection,req.body).then(result=>{
                 console.log(typeof(result))
                 if(result == 0){

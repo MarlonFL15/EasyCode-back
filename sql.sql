@@ -1,10 +1,16 @@
+drop database easycode;
+create database easycode;
+
+use  easycode;
 create table usuario(
+    id int not null auto_increment,
 	nome varchar(45) not null,
     senha varchar(45) null,
     email varchar(45) not null,
     foto longblob null,
+    google boolean not null,
     pathFoto varchar(100) null,
-    primary key(email)
+    primary key(id)
 );
 
 create table Questao(
@@ -71,38 +77,39 @@ create table respostaQuiz(
 create table respostaQuestao(
 	id int not null auto_increment,
 	idQuestao int not null,
-    idUsuario varchar(45) not null,
+    idUsuario int not null,
     codigo varchar(4000) not null,
     respostaUsuario varchar(100) not null,
     correto bool not null,
     dataEnvio date not null,
 	primary key (id),
     foreign key (idQuestao) references questao(id),
-    foreign key (idUsuario) references usuario(email)
+    foreign key (idUsuario) references usuario(id)
 );
 
 create table respostaForm(
 	id int not null auto_increment,
 	idForm int not null,
-    idUsuario varchar(45) not null,
+    idUsuario int not null,
     dataEnvio date not null,
 	primary key (id),
     foreign key (idForm) references form(id),
-    foreign key (idUsuario) references usuario(email)
+    foreign key (idUsuario) references usuario(id)
 );
 
 create table conquista(
 	id int not null auto_increment,
-	icon longblob not null,
+	icon longblob null,
     titulo varchar(45) not null,
+    descricao varchar(45),
 	primary key (id)
 );
 
 create table conquistaUsuario(
-	emailUsuario varchar(45) not null,
+	idUsuario int not null,
     idConquista int not null,
-	primary key (emailUsuario, idConquista),
-    foreign key(emailUsuario) references usuario(email),
+	primary key (idUsuario, idConquista),
+    foreign key(idUsuario) references usuario(id),
     foreign key(idConquista) references conquista(id)
 );
 

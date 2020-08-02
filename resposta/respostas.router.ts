@@ -1,5 +1,5 @@
 import {Router} from '../common/router'
-import * as restify from 'restify'
+import * as restify from './node_modules/restify'
 import connection from '../common/bd/connection'
 import Resposta from './respostas.models'
 import Runner from '../Runner/runner'
