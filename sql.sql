@@ -79,7 +79,6 @@ create table respostaQuestao(
 	idQuestao int not null,
     idUsuario int not null,
     codigo varchar(4000) not null,
-    respostaUsuario varchar(100) not null,
     correto bool not null,
     dataEnvio date not null,
 	primary key (id),

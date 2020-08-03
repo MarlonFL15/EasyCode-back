@@ -53,6 +53,30 @@ class UsuarioRouter extends Router{
                 
                 return next()
             })
+        }),
+        application.del('/deleteUser', (req,resp,next)=>{
+            Usuario.delete(connection,req.body).then(result=>{
+                console.log(typeof(result))
+                if(result == 0){
+                    resp.json({result:false})
+                }
+                else
+                    resp.json({result:true})
+                
+                return next()
+            })
+        }),
+        application.put('/updateUser', (req,resp,next)=>{
+            Usuario.update(connection,req.body).then(result=>{
+                console.log(typeof(result))
+                if(result == 0){
+                    resp.json({result:false})
+                }
+                else
+                    resp.json({result:true})
+                
+                return next()
+            })
         })
     }
 }

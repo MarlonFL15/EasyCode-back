@@ -1,5 +1,5 @@
 import { isDate } from 'util';
-
+import Conquista from '../Conquista/conquista.models'
 export default class usuario {
     static index(connection) {
         const query = 'SELECT nome, email, senha FROM usuario;';
@@ -76,6 +76,39 @@ export default class usuario {
             });
         });
     }
-    
 
+    static delete(connection, obj){
+        return new Promise((resolve, reject) => {
+            Conquista.deleteByUser(connection, obj.id).then(
+                response => {
+                    const query =`delete from usuario where id=${obj.id}`
+        
+                    connection.query(query, (err, result) => {
+                        if(err){
+                            console.log(err)
+                            reject(err)
+                        }
+                        resolve(result)
+                    })
+        
+                }
+            )
+        })
+
+    }
+    
+    static update(connection, obj){
+        let foto = obj.foto == null ? null:`'${obj.foto}'` 
+        const query =`update usuario set nome='${obj.nome}', foto=${foto}, senha='${obj.senha}' where id=${obj.id}`
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, result) => {
+                if(err){
+                    console.log(err)
+                    reject(err)
+                }
+                resolve(result)
+            })
+        })
+    }
+    
 }

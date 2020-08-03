@@ -39,4 +39,16 @@ export default class conquista {
         });
     }
 
+    static deleteByUser(connection, id){
+        const query = `delete from conquistausuario where idUsuario=${id}`
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
 }

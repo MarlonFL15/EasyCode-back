@@ -2,13 +2,15 @@ import connection from '../common/bd/connection'
 import { resolve } from 'path';
 export default class Resposta{
 
-    static insert(connection, req) {
+    static insert(connection, obj) {
 
-        const query = `INSERT INTO resposta
-        (resp, idPergunta, idUsuario,dateResposta) VALUES('${req.resp}', 
-        ${req.idPergunta}, 
-        ${req.idUsuario},
-        '${new Date().toISOString().split('T')[0]}'
+        const query = `INSERT INTO respostaquestao
+        (codigo, idQuestao, idUsuario,dataEnvio, correto) VALUES(
+        "${obj.code}", 
+        ${obj.idQuestao}, 
+        ${obj.idUsuario},
+        '${new Date().toISOString().split('T')[0]}',
+        ${obj.correto}
         )`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
@@ -34,6 +36,18 @@ export default class Resposta{
         });
     }
 
+    static getByUser(connection, id){
+        const query = `select * from respostaQuestao where idUsuario=${id}`;
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, result) => {
+                if(err){
+                    console.log(err)
+                    reject(err)
+                }
+                resolve(result)
+            })
+        })
+    }
     static getGabarito(id){
         const query = `select * from exemploQuestao where idQuestao=${id}`;
         return new Promise((resolve, reject) => {
