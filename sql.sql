@@ -2,6 +2,7 @@ drop database easycode;
 create database easycode;
 
 use  easycode;
+
 create table usuario(
     id int not null auto_increment,
 	nome varchar(45) not null,
@@ -31,7 +32,7 @@ create table exemploQuestao(
     foreign key(idQuestao) references questao(id)
 );
 
-create table quiz(
+create table pergunta(
 	id int not null auto_increment,
     enunciado varchar(256) not null,
     codigo varchar(256) null,
@@ -42,35 +43,43 @@ create table quiz(
 
 create table alternativa(
 	id int not null auto_increment,
-    label varchar(32) not null,
-    idQuiz int not null,
+    alternativa varchar(32) not null,
+    idPergunta int not null,
     primary key(id),
-    foreign key (idQuiz) references quiz(id)
+    foreign key (idPergunta) references pergunta(id)
 );
 
 create table form(
 	id int not null auto_increment,
-    titulo varchar(32) not null,
+    assunto varchar(32) not null,
     descricao varchar(256) not null,
     primary key(id)
 );
 
-create table formQuiz(
+create table Form_Pergunta(
 	id int not null auto_increment,
-    idQuiz int not null,
+    idPergunta int not null,
     idForm int not null,
-    primary key (id),
-    foreign key (idQuiz) references quiz(id),
+    primary key(id),
+    foreign key (idPergunta) references pergunta(id),
     foreign key (idForm) references form(id)
 );
 
-create table respostaQuiz(
-	id int not null auto_increment,
-	idFormQuiz int not null,
+create table respostaPergunta(
+    idFormPergunta int not null,
+	idFormResposta int not null,
     respostaUsuario varchar(100) not null,
     correto bool not null,
-	primary key (id),
-    foreign key (idFormQuiz) references formQuiz(id)
+    foreign key (idFormPergunta) references Form_Pergunta(id),
+    foreign key (idFormResposta) references respostaForm(id)
+);
+
+create table respostaForm(
+	id int not null auto_increment,
+	idUsuario int not null,
+    dataenvio datetime not null,
+    primary key(id),
+	foreign key (idUsuario) references usuario(id)
 );
 
 create table respostaQuestao(
@@ -79,25 +88,16 @@ create table respostaQuestao(
     idUsuario int not null,
     codigo varchar(4000) not null,
     correto bool not null,
-    dataEnvio date not null,
+    dataEnvio datetime not null,
 	primary key (id),
     foreign key (idQuestao) references questao(id),
     foreign key (idUsuario) references usuario(id)
 );
 
-create table respostaForm(
-	id int not null auto_increment,
-	idForm int not null,
-    idUsuario int not null,
-    dataEnvio date not null,
-	primary key (id),
-    foreign key (idForm) references form(id),
-    foreign key (idUsuario) references usuario(id)
-);
 
 create table conquista(
 	id int not null auto_increment,
-	icon longblob null,
+	icon blob null,
     titulo varchar(45) not null,
     descricao varchar(45),
 	primary key (id)
