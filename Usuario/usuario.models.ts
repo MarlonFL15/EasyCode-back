@@ -30,15 +30,16 @@ export default class usuario {
     static add(connection,usuario) {
         let query='';
         let foto = usuario.foto == null ? null:`'${usuario.foto}'` 
-        let pathFoto = usuario.pathFoto == null ? null:`'${usuario.pathFoto}'` 
+        if(foto == null){
+            foto =  usuario.pathFoto == null ? null:`'${usuario.pathFoto}'` 
+        }
         let senha = usuario.senha == null ? null:`'${usuario.senha}'` 
         
-        query = `INSERT INTO usuario(email, senha, nome, foto, pathFoto, google) VALUES(
+        query = `INSERT INTO usuario(email, senha, nome, foto, google) VALUES(
             '${usuario.email}', 
             ${senha}, 
             '${usuario.nome}', 
             ${foto} ,
-            ${pathFoto}, 
             ${usuario.google})`;
         console.log(usuario)
         return new Promise((resolve, reject) => {

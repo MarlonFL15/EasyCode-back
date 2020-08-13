@@ -9,7 +9,6 @@ create table usuario(
     email varchar(45) not null,
     foto longblob null,
     google boolean not null,
-    pathFoto varchar(100) null,
     primary key(id)
 );
 
