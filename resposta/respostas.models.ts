@@ -9,7 +9,7 @@ export default class Resposta{
         "${obj.code}", 
         ${obj.idQuestao}, 
         ${obj.idUsuario},
-        '${new Date().toISOString().split('T')[0]}',
+        NOW(),
         ${obj.correto}
         )`;
         return new Promise((resolve, reject) => {

@@ -40,4 +40,19 @@ export default class Pergunta {
             });
         });
     }
+
+    static getRandomByAssunto(connection, assunto){
+        const query = `SELECT * FROM questao WHERE assunto='${assunto}' order by rand() limit 1;`;
+        console.log(query)
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, results, fields) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(results);
+            });
+        }); 
+    }
+
 }

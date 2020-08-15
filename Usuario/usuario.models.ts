@@ -64,9 +64,22 @@ export default class usuario {
             });
         });
     }
+    static getUserById(connection,id) {
+        const query = `SELECT * FROM usuario WHERE id='${id}'`;
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
 
-    static getUseByGoogle(connection, usuario) {
-        const query = `SELECT * FROM usuario WHERE email='${usuario.email}' and senha=null`;
+    static getUserByGoogle(connection, usuario) {
+        const query = `SELECT * FROM usuario WHERE email='${usuario.email}' and senha is null`;
+        console.log(query)
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {

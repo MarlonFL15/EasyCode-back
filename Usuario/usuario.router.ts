@@ -7,12 +7,12 @@ class UsuarioRouter extends Router{
     applyRoutes(application: restify.Server){
         application.post('/login', (req,resp,next)=>{
             Usuario.login(connection,req.body).then(result=>{
-                console.log(typeof(result))
+                console.log(result)
                 if(result == 0){
                     resp.json({result:false})
                 }
                 else
-                    resp.json({result:true})
+                    resp.json({result:result})
                 
                 return next()
             })
@@ -32,7 +32,8 @@ class UsuarioRouter extends Router{
         }),
         application.post('/getUserEmail', (req,resp,next)=>{
             Usuario.getUserByEmail(connection,req.body).then(result=>{
-                console.log(typeof(result))
+                console.log('valor do result: ')
+                console.log(result)
                 if(result == 0){
                     resp.json({result:false})
                 }
@@ -42,15 +43,27 @@ class UsuarioRouter extends Router{
                 return next()
             })
         }),
+
+        application.get('/getUserById/:id', (req, resp, next) => {
+            Usuario.getUserById(connection, req.params.id).then(result => {
+                resp.json(result)
+                return next()
+            })
+
+        })
         application.post('/getUserGoogle', (req,resp,next)=>{
-            Usuario.getUseByGoogle(connection,req.body).then(result=>{
-                console.log(typeof(result))
-                if(result == 0){
+            Usuario.getUserByGoogle(connection,req.body).then(result=>{
+                // console.log(typeof(result))
+                console.log("valor do result: ")
+                console.log(result)
+                if(result.length == 0){
+                    console.log('caiu no false')
                     resp.json({result:false})
                 }
-                else
-                    resp.json({result:true})
-                
+                else{
+                    console.log('caiu no true')
+                    resp.json({result:result})
+                }
                 return next()
             })
         }),

@@ -65,14 +65,7 @@ create table Form_Pergunta(
     foreign key (idForm) references form(id)
 );
 
-create table respostaPergunta(
-    idFormPergunta int not null,
-	idFormResposta int not null,
-    respostaUsuario varchar(100) not null,
-    correto bool not null,
-    foreign key (idFormPergunta) references Form_Pergunta(id),
-    foreign key (idFormResposta) references respostaForm(id)
-);
+
 
 create table respostaForm(
 	id int not null auto_increment,
@@ -80,6 +73,15 @@ create table respostaForm(
     dataenvio datetime not null,
     primary key(id),
 	foreign key (idUsuario) references usuario(id)
+);
+
+create table respostaPergunta(
+    idFormPergunta int not null,
+	idFormResposta int not null,
+    respostaUsuario varchar(100) not null,
+    correto bool not null,
+    foreign key (idFormPergunta) references Form_Pergunta(id),
+    foreign key (idFormResposta) references respostaForm(id)
 );
 
 create table respostaQuestao(
