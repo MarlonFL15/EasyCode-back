@@ -25,9 +25,25 @@ class PerguntaRouter extends Router{
                 resp.json(result)
                 return next()
             })
-            
+        }),
+        application.get('/getPontuacaoTotal', (req, resp, next) => {
+            Pergunta.getPontuacaoTotal(connection).then(result => {
+                resp.json(result)
+                return next()
+            }) 
+        }),
+        application.get('/getPontuacaoByUser/:id', (req, resp, next) => {
+            Pergunta.getPontuacaoByUsuario(connection, req.params.id).then(result => {
+                resp.json(result)
+                return next()
+            }) 
+        }),
+        application.get('/getCountPontuacaoByUser/:id', (req, resp, next) => {
+            Pergunta.getCountSubmissoes(connection, req.params.id).then(result => {
+                resp.json(result)
+                return next()
+            }) 
         })
-        
     }
 }
 
