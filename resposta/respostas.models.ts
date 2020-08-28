@@ -36,6 +36,21 @@ export default class Resposta{
         });
     }
 
+    static sendQuiz(connection, obj){
+        return new Promise((resolve, reject) => {
+            obj.respostas.forEach(element => {
+                let query = `insert into respostapergunta(idformpergunta, respostausuario, correto) values
+                (${element.idFormPergunta}, '${element.respostaUsuario}', ${element.correto})`
+                connection.query(query, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
+                    resolve(result);
+                });
+            });
+        })
+    }
     static getByUser(connection, id){
         const query = `select * from respostaQuestao where idUsuario=${id}`;
         return new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
 import connection from '../common/bd/connection'
 
-export default class Pergunta {
+export default class Questao {
     static index(connection) {
         const query = `SELECT * FROM questao`;
         return new Promise((resolve, reject) => {

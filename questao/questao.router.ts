@@ -4,7 +4,7 @@ import connection from '../common/bd/connection'
 import Pergunta from './questao.models'
 import { NodeBaseExport } from 'readable-stream'
 
-class PerguntaRouter extends Router{
+class QuestaoRouter extends Router{
     applyRoutes(application: restify.Server){
         
         application.get('/perguntas', (req,resp,next)=>{
@@ -47,4 +47,4 @@ class PerguntaRouter extends Router{
     }
 }
 
-export const perguntasRouter = new PerguntaRouter()
+export const questoesRouter = new QuestaoRouter()

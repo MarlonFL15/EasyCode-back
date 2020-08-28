@@ -30,6 +30,13 @@ class RespostaRouter extends Router{
                 return next()
             })
                 
+        }),
+        application.post('/sendQuiz', (req, resp, next) => {
+            Resposta.sendQuiz(connection, req.body).then(response => {
+                resp.json(response)
+                return next()
+            })
+
         })
     }
 }
