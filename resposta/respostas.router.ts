@@ -18,6 +18,18 @@ class RespostaRouter extends Router{
                 return next()
             })
         }),
+        application.get('/getCodigoById/:id', (req,resp,next)=>{
+            Resposta.getCodigoById(connection, req.params.id).then(result=>{
+                resp.json(result)
+                return next()
+            })
+        }),
+        application.get('/getRespostasByQuiz/:id', (req,resp,next)=>{
+            Resposta.getRespostasByQuiz(connection, req.params.id).then(result=>{
+                resp.json(result)
+                return next()
+            })
+        }),
         application.get('/getQuizByUser/:id', (req,resp,next)=>{
             Resposta.getQuizByUser(connection, req.params.id).then(result=>{
                 resp.json(result)
