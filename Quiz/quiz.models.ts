@@ -13,19 +13,8 @@ export default class Pergunta {
 
     static getQuizByAssunto(connection, assunto, idUsuario) {
         return new Promise((resolve, reject) => {
-            const queryForm = `insert into form(idusuario, datacriacao, assunto) values(${idUsuario}, now(), '${assunto}')`
-            //console.log(queryForm)
-            let idForm = null
-            connection.query(queryForm, (err, result) =>{
-                if(err){ 
-                    console.log(err)
-                    reject(err)
-                }
-                else{
-                    idForm = result.insertId
-                }
-            })
-            const query = `SELECT * FROM pergunta where assunto = '${assunto}' order by rand() limit 5;`;
+
+            const query = `SELECT * FROM pergunta where assunto = '${assunto}' order by rand() limit 2;`;
         
             connection.query(query, (err, result) => {
                 if (err){
@@ -35,18 +24,7 @@ export default class Pergunta {
                 else{
 
                     result.forEach((element,index) => {
-                        const queryPergunta = `insert into form_pergunta(idPergunta, idForm) values(${element.id}, ${idForm})`
-                        connection.query(queryPergunta, (err, resultForm) => {
-                            if(err){
-                                reject(err)
-                                //console.log(err)
-                            }
-                            else{
-                               // console.log('valor do index: ')
-                                //console.log(index)
-                                result[index].idFormPergunta = resultForm.insertId
-                            }
-                        })
+
                         const query = `SELECT alternativa FROM alternativa where idPergunta = ${element.id} order by rand()`
                         connection.query(query, (err, result2) =>{
                             

@@ -13,13 +13,18 @@ class RespostaRouter extends Router{
             })
         }),        
         application.get('/getRespostasByUser/:id', (req,resp,next)=>{
-            Resposta.getByUser(connection, req.params.id).then(result=>{
+            Resposta.getQuestoesByUser(connection, req.params.id).then(result=>{
+                resp.json(result)
+                return next()
+            })
+        }),
+        application.get('/getQuizByUser/:id', (req,resp,next)=>{
+            Resposta.getQuizByUser(connection, req.params.id).then(result=>{
                 resp.json(result)
                 return next()
             })
         }),
         application.post('/submit', (req,resp,next)=>{
-            console.log(req.body)
             Resposta.getGabarito(req.body.idQuestao).then(response => {
                 const code = req.body.code
                 Runner.judge(response, code).then(response => {

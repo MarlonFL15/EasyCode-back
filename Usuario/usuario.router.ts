@@ -7,7 +7,7 @@ class UsuarioRouter extends Router{
     applyRoutes(application: restify.Server){
         application.post('/login', (req,resp,next)=>{
             Usuario.login(connection,req.body).then(result=>{
-                console.log(result)
+                
                 if(result == 0){
                     resp.json({result:false})
                 }
@@ -52,16 +52,16 @@ class UsuarioRouter extends Router{
 
         })
         application.post('/getUserGoogle', (req,resp,next)=>{
-            Usuario.getUserByGoogle(connection,req.body).then(result=>{
+            Usuario.getUserByGoogle(connection,req.body).then(result =>{
                 // console.log(typeof(result))
-                console.log("valor do result: ")
-                console.log(result)
-                if(result.length == 0){
-                    console.log('caiu no false')
+                let list =  <Array<any>>result;
+                let leng:number = list.length
+                if(leng == 0){
+                   
                     resp.json({result:false})
                 }
                 else{
-                    console.log('caiu no true')
+                    
                     resp.json({result:result})
                 }
                 return next()
@@ -69,7 +69,7 @@ class UsuarioRouter extends Router{
         }),
         application.del('/deleteUser', (req,resp,next)=>{
             Usuario.delete(connection,req.body).then(result=>{
-                console.log(typeof(result))
+               
                 if(result == 0){
                     resp.json({result:false})
                 }
@@ -81,7 +81,7 @@ class UsuarioRouter extends Router{
         }),
         application.put('/updateUser', (req,resp,next)=>{
             Usuario.update(connection,req.body).then(result=>{
-                console.log(typeof(result))
+                
                 if(result == 0){
                     resp.json({result:false})
                 }

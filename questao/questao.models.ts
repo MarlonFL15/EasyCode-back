@@ -17,6 +17,7 @@ export default class Questao {
                 if (err) reject(err);
                 else{
                     const questao = result[0]
+                    
                     const query = `SELECT * FROM exemploQuestao WHERE idQuestao = ${id};`;
                     connection.query(query, (err, result) => {
                         questao.exemplos = result

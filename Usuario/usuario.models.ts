@@ -79,7 +79,7 @@ export default class usuario {
 
     static getUserByGoogle(connection, usuario) {
         const query = `SELECT * FROM usuario WHERE email='${usuario.email}' and senha is null`;
-        console.log(query)
+        
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
