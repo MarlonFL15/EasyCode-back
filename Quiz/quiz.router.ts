@@ -13,7 +13,20 @@ class PerguntaRouter extends Router{
                 resp.json(response)
                 return next()
             })
+        }),
+        application.get('/getEnviosQuiz/:id', (req,resp,next)=>{
+            Pergunta.getCountEnvios(connection,req.params.id).then(response =>{
+                resp.json(response)
+                return next()
+            })
+        }),
+        application.get('/getPontuacaoQuiz/:id', (req,resp,next)=>{
+            Pergunta.getPontuacaoByUsuario(connection,req.params.id).then(response =>{
+                resp.json(response)
+                return next()
+            })
         })
+
         
     }
 }
