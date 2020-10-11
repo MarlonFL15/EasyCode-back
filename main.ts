@@ -4,9 +4,11 @@ import {respostaRouter} from './Resposta/respostas.router'
 import {usuarioRouter} from './Usuario/usuario.router'
 import {conquistaRouter} from './Conquista/conquista.router'
 import {perguntasRouter} from './Quiz/quiz.router'
+import {tabelaVerdadeRouter} from './Tabela-Verdade/tabela-verdade.router'
+
 const server = new Server()
 
-server.bootstrap([perguntasRouter, conquistaRouter,questoesRouter,respostaRouter, usuarioRouter]).then(server=>{
+server.bootstrap([tabelaVerdadeRouter, perguntasRouter, conquistaRouter,questoesRouter,respostaRouter, usuarioRouter]).then(server=>{
     console.log('Server is linstening', server.application.address())
     console.log('foi')
 }).catch(error=>{

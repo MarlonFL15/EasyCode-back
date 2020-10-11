@@ -67,7 +67,7 @@ export default class Resposta{
         })
     }
     static getQuestoesByUser(connection, id){
-        const query = `select r.id as id, 1 as tipo, r.correto, DATE_FORMAT(r.dataenvio, "%Y-%m-%d %H:%i:%s" ) as datacriacao, q.titulo
+        const query = `select q.assunto, r.id as id, 1 as tipo, r.correto, DATE_FORMAT(r.dataenvio, "%Y-%m-%d %H:%i:%s" ) as datacriacao, q.titulo
         from respostaquestao r
         inner join questao q on q.id=r.idquestao
         where idusuario=${id} order by r.dataenvio desc;`;
