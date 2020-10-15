@@ -10,11 +10,17 @@ class RespostaRouter extends Router{
             Resposta.insert(connection, req.body).then(result=>{
                 resp.json(result)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),        
         application.get('/getRespostasByUser/:id', (req,resp,next)=>{
             Resposta.getQuestoesByUser(connection, req.params.id).then(result=>{
                 resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         }),
@@ -22,17 +28,26 @@ class RespostaRouter extends Router{
             Resposta.getCodigoById(connection, req.params.id).then(result=>{
                 resp.json(result)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.get('/getRespostasByQuiz/:id', (req,resp,next)=>{
             Resposta.getRespostasByQuiz(connection, req.params.id).then(result=>{
                 resp.json(result)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.get('/getQuizByUser/:id', (req,resp,next)=>{
             Resposta.getQuizByUser(connection, req.params.id).then(result=>{
                 resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         }),
@@ -45,12 +60,18 @@ class RespostaRouter extends Router{
                     return next()
                 })
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
                 
         }),
         application.post('/sendQuiz', (req, resp, next) => {
             Resposta.sendQuiz(connection, req.body).then(response => {
                 resp.json(response)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
 

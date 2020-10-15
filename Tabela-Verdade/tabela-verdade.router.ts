@@ -9,11 +9,17 @@ class TabelaRouter extends Router{
             Tabela.findAll(connection, req.params.id).then(result=>{
                 resp.json(result)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         })
         application.get('/tabela-verdade/:id', (req,resp,next)=>{
             Tabela.index(connection, req.params.id).then(result=>{
                 resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         })
@@ -21,6 +27,9 @@ class TabelaRouter extends Router{
             console.log(req.body)
             Tabela.insert(connection, req.body).then(result=>{
                 resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         })

@@ -15,6 +15,9 @@ class UsuarioRouter extends Router{
                     resp.json({result:result})
                 
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.post('/addUser', (req,resp,next)=>{
@@ -22,11 +25,17 @@ class UsuarioRouter extends Router{
             Usuario.add(connection,req.body).then(result=>{
                 resp.json(result)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.get('/users', (req,resp,next)=>{
             Usuario.index(connection).then(result=>{
                 resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         }),
@@ -41,12 +50,18 @@ class UsuarioRouter extends Router{
                     resp.json({result:true})
                 
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
 
         application.get('/getUserById/:id', (req, resp, next) => {
             Usuario.getUserById(connection, req.params.id).then(result => {
                 resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
 
@@ -65,6 +80,9 @@ class UsuarioRouter extends Router{
                     resp.json({result:result})
                 }
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.del('/deleteUser', (req,resp,next)=>{
@@ -77,6 +95,9 @@ class UsuarioRouter extends Router{
                     resp.json({result:true})
                 
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.put('/updateUser', (req,resp,next)=>{
@@ -88,6 +109,9 @@ class UsuarioRouter extends Router{
                 else
                     resp.json({result:true})
                 
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         })

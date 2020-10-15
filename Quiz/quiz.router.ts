@@ -12,17 +12,26 @@ class PerguntaRouter extends Router{
             Pergunta.getQuizByAssunto(connection, req.query.assunto, req.query.idUsuario).then(response =>{
                 resp.json(response)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.get('/getEnviosQuiz/:id', (req,resp,next)=>{
             Pergunta.getCountEnvios(connection,req.params.id).then(response =>{
                 resp.json(response)
                 return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
             })
         }),
         application.get('/getPontuacaoQuiz/:id', (req,resp,next)=>{
             Pergunta.getPontuacaoByUsuario(connection,req.params.id).then(response =>{
                 resp.json(response)
+                return next()
+            }).catch(e => {
+                resp.json(e)
                 return next()
             })
         })
