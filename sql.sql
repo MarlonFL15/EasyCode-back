@@ -77,6 +77,7 @@ create table respostaQuestao(
     codigo varchar(4000) not null,
     correto bool not null,
     dataEnvio datetime not null,
+    roleta bool not null,
 	primary key (id),
     foreign key (idQuestao) references questao(id),
     foreign key (idUsuario) references usuario(id)
@@ -426,8 +427,6 @@ INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (156,'
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (157,'Problema 1','Muito Fácil','Problema muito fácil com apenas 3 dicas e 3 casas.','problema-1');
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (158,'Problema 2','Fácil','Com 6 dicas e 3 casas, esse problema é fácil.','problema-2');
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (159,'Problema 3','Normal','Com 9 dicas e 4 casas, esse problema já não é tão trivial.','problema-3');
-
-select * from conquista;
 
 insert into conquista(pontuacao, titulo, descricao) values (100, 'Olá mundo', 'Resolva a questão "Olá mundo"');
 insert into conquista(pontuacao, titulo, descricao) values (100, 'Primeiro quiz', 'Resolva seu primeiro quiz');
