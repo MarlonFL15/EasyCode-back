@@ -2,6 +2,7 @@ import {Router} from '../common/router'
 import * as restify from 'restify'
 import connection from '../common/bd/connection'
 import Resposta from './respostas.models'
+import Conquista from '../Conquista/conquista.models'
 import Runner from '../Runner/runner'
 
 class RespostaRouter extends Router{
@@ -55,9 +56,14 @@ class RespostaRouter extends Router{
             Resposta.getGabarito(req.body.idQuestao).then(response => {
                 const code = req.body.code
                 Runner.judge(response, code).then(response => {
-                    Resposta.insert(connection, {...req.body, correto:response.result})
-                    resp.json({result:response.result})
-                    return next()
+                    Resposta.insert(connection, {...req.body, correto:response.result}).then(r => {
+                        Conquista.checkConquistasQuestoes(connection, req.body.idQuestao, req.body.idUsuario, r).then(r => {    
+                            console.log('valor do r: ')
+                            console.log(r)
+                            resp.json({result:response.result, conquista:r})
+                            return next()
+                        })
+                    })
                 })
                 return next()
             }).catch(e => {
@@ -68,8 +74,16 @@ class RespostaRouter extends Router{
         }),
         application.post('/sendQuiz', (req, resp, next) => {
             Resposta.sendQuiz(connection, req.body).then(response => {
-                resp.json(response)
-                return next()
+                Conquista.checkConquistasQuiz(connection, response, req.body.idUsuario).then(r => {
+                    console.log(r)
+                    resp.json({conquista: r})
+                    return next()
+                }).catch(e => {
+                    console.log(e)
+                    resp.json(e)
+                    return next()
+                })
+
             }).catch(e => {
                 resp.json(e)
                 return next()

@@ -57,7 +57,7 @@ export default class Pergunta {
     static getQuizByAssunto(connection, assunto, idUsuario) {
         return new Promise((resolve, reject) => {
 
-            const query = `SELECT * FROM pergunta where assunto = '${assunto}' order by rand() limit 2;`;
+            const query = `SELECT * FROM pergunta where assunto = '${assunto}' order by rand() limit 1;`;
         
             connection.query(query, (err, result) => {
                 if (err){

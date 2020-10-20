@@ -1,24 +1,29 @@
 import connection from '../common/bd/connection'
 import { resolve } from 'path';
+import { Console } from 'console';
+import Conquistas from '../Conquista/conquista.models'
 export default class Resposta{
 
     static insert(connection, obj) {
 
         const query = `INSERT INTO respostaquestao
-        (codigo, idQuestao, idUsuario,dataEnvio, correto) VALUES(
+        (codigo, idQuestao, idUsuario,dataEnvio, correto, roleta) VALUES(
         '${obj.xml}', 
         ${obj.idQuestao}, 
         ${obj.idUsuario},
         NOW(),
-        ${obj.correto}
+        ${obj.correto},
+        ${obj.roleta}
         )`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
                     console.log(err);
                     reject(err);
-                }
-                resolve(result);
+                }       
+                
+                resolve(result.insertId);
+
             });
         });
     }
@@ -37,8 +42,16 @@ export default class Resposta{
     }
 
     static sendQuiz(connection, obj){
+
         return new Promise((resolve, reject) => {
-            const query = `insert into form(idUsuario, assunto, dataCriacao) values(${obj.idUsuario}, '${obj.assunto}', NOW())`;
+            let total = 0
+            let acertos = 0
+            Object.values(obj.respostas).map(e => {
+                total += 1
+                if(e.correto)
+                    acertos+=1
+            })
+            const query = `insert into form(idUsuario, assunto, dataCriacao, percentual) values(${obj.idUsuario}, '${obj.assunto}', NOW(), ${acertos/total*100})`;
            
             connection.query(query, (err, result) => {
                 if (err) {
@@ -51,12 +64,12 @@ export default class Resposta{
                     let query = `insert into form_pergunta(idPergunta, idForm, respostausuario, correto) values
                     (${element.id}, ${idForm}, '${element.respostaUsuario}', ${element.correto})`
                     
-                    connection.query(query, (err, result) => {
+                    connection.query(query, (err, result1) => {
                         if (err) {
                             console.log(err);
                             reject(err);
                         }
-                        resolve(result);
+                        resolve(result.insertId);
                     });
                 });
 

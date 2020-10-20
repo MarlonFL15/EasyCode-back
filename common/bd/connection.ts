@@ -6,6 +6,7 @@ const connectionConfig = {
     user: 'root',
     password: '',
     database: 'easycode',
+    multipleStatements: true
 };
 
 export default mysql.createConnection(connectionConfig);

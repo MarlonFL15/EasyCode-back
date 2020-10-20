@@ -44,6 +44,8 @@ export default class Questao {
 
     static getRandomByAssunto(connection, assunto){
         const query = `SELECT * FROM questao WHERE assunto='${assunto}' order by rand() limit 1;`;
+    
+        //const query = `SELECT * from questao where id= 1 limit 1;`
         return new Promise((resolve, reject) => {
             connection.query(query, (err, results, fields) => {
                 if (err) {

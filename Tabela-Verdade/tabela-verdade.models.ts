@@ -42,7 +42,7 @@ export default class conquista {
                     console.log(err);
                     reject(err);
                 }
-                resolve(result);
+                resolve(result.insertId)
             });
         });
     }

@@ -2,6 +2,7 @@ import {Router} from '../common/router'
 import * as restify from 'restify'
 import connection from '../common/bd/connection'
 import Tabela from './tabela-verdade.models'
+import Conquista from '../Conquista/conquista.models'
 
 class TabelaRouter extends Router{
     applyRoutes(application: restify.Server){
@@ -26,8 +27,11 @@ class TabelaRouter extends Router{
         application.post('/tabela-verdade', (req,resp,next)=>{
             console.log(req.body)
             Tabela.insert(connection, req.body).then(result=>{
-                resp.json(result)
-                return next()
+                Conquista.checkConquistasTabelaVerdade(connection, result, req.body.idUsuario).then(e => {
+                    
+                    resp.json({conquista:e})
+                    return next()
+                })
             }).catch(e => {
                 resp.json(e)
                 return next()

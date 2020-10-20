@@ -85,9 +85,9 @@ create table respostaQuestao(
 
 create table conquista(
 	id int not null auto_increment,
-	icon blob null,
+	pontuacao int null,
     titulo varchar(45) not null,
-    descricao varchar(45),
+    descricao varchar(100),
 	primary key (id)
 );
 
@@ -188,12 +188,6 @@ insert into alternativa(alternativa, idPergunta) values('OU', 6);
 insert into alternativa(alternativa, idPergunta) values('NÃO', 6);
 insert into alternativa(alternativa, idPergunta) values('Maior que', 6);
 
-insert into pergunta(enunciado, codigo, resposta, assunto) values('O que o operador && representa?', null, 'E', 'Seleção');
-insert into alternativa(alternativa, idPergunta) values('E', 6);
-insert into alternativa(alternativa, idPergunta) values('OU', 6);
-insert into alternativa(alternativa, idPergunta) values('NÃO', 6);
-insert into alternativa(alternativa, idPergunta) values('Maior que', 6);
-
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Sabendo x é igual a 5, que o código abaixo retorna?', 'x >=5 && x<=10', 'Verdadeiro', 'Seleção');
 insert into alternativa(alternativa, idPergunta) values('Verdadeiro', 7);
 insert into alternativa(alternativa, idPergunta) values('Falso', 7);
@@ -221,57 +215,58 @@ insert into alternativa(alternativa, idPergunta) values('do', 11);
 insert into alternativa(alternativa, idPergunta) values('while', 11);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Marque qual das alternativas está com a sintaxe correta',null , 'for(i = 0;  i <= 10; i++)', 'Repetição');
-insert into alternativa(alternativa, idPergunta) values('for(i = 0;  i <= 10; i++)', 13);
-insert into alternativa(alternativa, idPergunta) values('for(i = 0,  i <= 10, i++)', 13);
-insert into alternativa(alternativa, idPergunta) values('for(i = 0; i++; i <= 10;)', 13);
-insert into alternativa(alternativa, idPergunta) values('for(i = 0, i++, i <= 10;)', 13);
+insert into alternativa(alternativa, idPergunta) values('for(i = 0;  i <= 10; i++)', 12);
+insert into alternativa(alternativa, idPergunta) values('for(i = 0,  i <= 10, i++)', 12);
+insert into alternativa(alternativa, idPergunta) values('for(i = 0; i++; i <= 10;)', 12);
+insert into alternativa(alternativa, idPergunta) values('for(i = 0, i++, i <= 10;)', 12);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Sabendo que i = 0, qual será o valor da variável i após o laço?','while(i<=10){\ni++}' , '11', 'Repetição');
-insert into alternativa(alternativa, idPergunta) values('11', 14);
-insert into alternativa(alternativa, idPergunta) values('10', 14);
-insert into alternativa(alternativa, idPergunta) values('9', 14);
-insert into alternativa(alternativa, idPergunta) values('10', 14);
+insert into alternativa(alternativa, idPergunta) values('11', 13);
+insert into alternativa(alternativa, idPergunta) values('10', 13);
+insert into alternativa(alternativa, idPergunta) values('9', 13);
+insert into alternativa(alternativa, idPergunta) values('10', 13);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Defina o nome das 3 partes do for', null, 'inicialização; condição; incremento', 'Repetição');
-insert into alternativa(alternativa, idPergunta) values('condição; inicialização; incremento', 15);
-insert into alternativa(alternativa, idPergunta) values('inicialização; condição; incremento', 15);
-insert into alternativa(alternativa, idPergunta) values('inicialização; incremento; condição', 15);
+insert into alternativa(alternativa, idPergunta) values('condição; inicialização; incremento', 14);
+insert into alternativa(alternativa, idPergunta) values('inicialização; condição; incremento', 14);
+insert into alternativa(alternativa, idPergunta) values('inicialização; incremento; condição', 14);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Qual é o nome da palavra usada para interromper um laço?', null, 'break', 'Repetição');
-insert into alternativa(alternativa, idPergunta) values('return 0', 16);
-insert into alternativa(alternativa, idPergunta) values('break', 16);
-insert into alternativa(alternativa, idPergunta) values('continue', 16);
-insert into alternativa(alternativa, idPergunta) values('goto', 16);
+insert into alternativa(alternativa, idPergunta) values('return 0', 15);
+insert into alternativa(alternativa, idPergunta) values('break', 15);
+insert into alternativa(alternativa, idPergunta) values('continue', 15);
+insert into alternativa(alternativa, idPergunta) values('goto', 15);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Qual é o nome da biblioteca que importa as funções de matemática?', null, 'math', 'Matemática');
-insert into alternativa(alternativa, idPergunta) values('math', 17);
-insert into alternativa(alternativa, idPergunta) values('matemática', 17);
-insert into alternativa(alternativa, idPergunta) values('maht', 17);
-insert into alternativa(alternativa, idPergunta) values('calc', 17);
+insert into alternativa(alternativa, idPergunta) values('math', 16);
+insert into alternativa(alternativa, idPergunta) values('matemática', 16);
+insert into alternativa(alternativa, idPergunta) values('maht', 16);
+insert into alternativa(alternativa, idPergunta) values('calc', 16);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Qual é o nome da função que calcula a raíz quadrada?', null, 'sqrt', 'Matemática');
-insert into alternativa(alternativa, idPergunta) values('sqrt', 18);
-insert into alternativa(alternativa, idPergunta) values('pow', 18);
-insert into alternativa(alternativa, idPergunta) values('cos', 18);
-insert into alternativa(alternativa, idPergunta) values('max', 18);
+insert into alternativa(alternativa, idPergunta) values('sqrt', 17);
+insert into alternativa(alternativa, idPergunta) values('pow', 17);
+insert into alternativa(alternativa, idPergunta) values('cos', 17);
+insert into alternativa(alternativa, idPergunta) values('max', 17);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Sabendo que x = 3 e y = 2, quando retorna o código abaixo?', 'pow(x,y)', '9', 'Matemática');
-insert into alternativa(alternativa, idPergunta) values('9', 19);
-insert into alternativa(alternativa, idPergunta) values('6', 19);
-insert into alternativa(alternativa, idPergunta) values('8', 19);
-insert into alternativa(alternativa, idPergunta) values('27', 19);
+insert into alternativa(alternativa, idPergunta) values('9', 18);
+insert into alternativa(alternativa, idPergunta) values('6', 18);
+insert into alternativa(alternativa, idPergunta) values('8', 18);
+insert into alternativa(alternativa, idPergunta) values('27', 18);
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Qual é a função do operador "%"?', null, 'resto da divisão', 'Matemática');
-insert into alternativa(alternativa, idPergunta) values('resto da divisão', 20);
-insert into alternativa(alternativa, idPergunta) values('porcentagem', 20);
-insert into alternativa(alternativa, idPergunta) values('divisão', 20);
-insert into alternativa(alternativa, idPergunta) values('diferença', 20);
+insert into alternativa(alternativa, idPergunta) values('resto da divisão', 19);
+insert into alternativa(alternativa, idPergunta) values('porcentagem', 19);
+insert into alternativa(alternativa, idPergunta) values('divisão', 19);
+insert into alternativa(alternativa, idPergunta) values('diferença', 19);
 
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('Quanto vai ser o valor de i?', 'int i = 3+5*5', '28', 'Matemática');
-insert into alternativa(alternativa, idPergunta) values('28', 21);
-insert into alternativa(alternativa, idPergunta) values('40', 21);
+insert into alternativa(alternativa, idPergunta) values('28', 20);
+insert into alternativa(alternativa, idPergunta) values('40', 20);
 
+insert into usuario(nome, senha, email, google) values('Marlon', '1', 'teste', 0);
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (1,'Amigas na Escola','Muito Fácil','Descubra qual a matéria preferida, o animal de estimação, o suco que mais gostam, a cor da mochila e a cidade brasileira que as 5 amigas pretendem visitar nas próximas férias.','amigas-na-escola');
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (2,'Amigas na Piscina','Muito Fácil','Num dia ensolarado quatro amigas se reuniram para nadar na piscina. Descubra as características delas seguindo as dicas.','amigas-na-piscina');
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (3,'Compras do Mês','Fácil','Cinco mulheres estão fazendo as compras do mês no supermercado. Cada uma delas está acompanhada por alguém, esqueceu de algum item e está usando uma bolsa de cor diferente.','compras-do-mês');
@@ -431,3 +426,20 @@ INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (156,'
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (157,'Problema 1','Muito Fácil','Problema muito fácil com apenas 3 dicas e 3 casas.','problema-1');
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (158,'Problema 2','Fácil','Com 6 dicas e 3 casas, esse problema é fácil.','problema-2');
 INSERT INTO TABELA_VERDADE (`id`,`nome`,`nivel`,`descricao`,`url`) VALUES (159,'Problema 3','Normal','Com 9 dicas e 4 casas, esse problema já não é tão trivial.','problema-3');
+
+select * from conquista;
+
+insert into conquista(pontuacao, titulo, descricao) values (100, 'Olá mundo', 'Resolva a questão "Olá mundo"');
+insert into conquista(pontuacao, titulo, descricao) values (100, 'Primeiro quiz', 'Resolva seu primeiro quiz');
+insert into conquista(pontuacao, titulo, descricao) values (100, 'Tentando a sorte', 'Gire a roleta');
+insert into conquista(pontuacao, titulo, descricao) values (100, 'Ora ora...', 'Resolva sua primeira tabela verdade');
+insert into conquista(pontuacao, titulo, descricao) values (200, 'Programador iniciante', 'Resolva todas as questões de sequência');
+insert into conquista(pontuacao, titulo, descricao) values (200, 'Acertando tudo', 'Gabarite um quiz');
+insert into conquista(pontuacao, titulo, descricao) values (200, 'De tudo um pouco', 'Resolva uma questão de cada assunto');
+insert into conquista(pontuacao, titulo, descricao) values (500, 'Programador intermediário', 'Resolva todas as questões de seleção');
+insert into conquista(pontuacao, titulo, descricao) values (500, 'Viciado na sorte', 'Resolva 3 questões pela roleta');
+insert into conquista(pontuacao, titulo, descricao) values (1000, 'Programador avançado', 'Resolva todas as questões de repetição');
+insert into conquista(pontuacao, titulo, descricao) values (1000, 'Solucionador de problemas', 'Resolva 10 questões de programação');
+insert into conquista(pontuacao, titulo, descricao) values (1000, 'Sherlock Holmes', 'Resolva 10 tabelas verdade');
+insert into conquista(pontuacao, titulo, descricao) values (1000, 'Viciado em quiz', 'Resolva 10 quizzes');
+insert into conquista(pontuacao, titulo, descricao) values (1000, 'Nível Einstein', 'Resolva uma tabela verdade nível muito difícil');
