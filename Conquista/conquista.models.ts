@@ -29,13 +29,23 @@ export default class conquista {
         });
     }
     static insertConquistaUser(connection, obj) {
-        const query = `insert into conquistaUsuario values(${obj.idUsuario}, ${obj.idConquista})`;
+        let query = `insert into conquistaUsuario values(${obj.idUsuario}, ${obj.idConquista})`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
                     console.log(err);
                     reject(err);
                 }
+                let query = `select * from conquista where id=${obj.idConquista};`
+                connection.query(query, (err, result) => {
+                    console.log(query)
+                    console.log(result)
+                    const pontos = result[0].pontuacao
+                    query = `update usuario set pontuacao=pontuacao+${pontos} where id=${obj.idUsuario};`
+                    connection.query(query, (err, result) => {
+                        console.log(err)
+                    })
+                })
                 resolve(result);
             });
         });

@@ -8,6 +8,7 @@ create table usuario(
     senha varchar(45) null,
     email varchar(45) not null,
     foto longblob null,
+    pontuacao bigint default 0,
     google boolean not null,
     primary key(id)
 );
@@ -148,9 +149,6 @@ insert into exemploQuestao values(5,'3\n5',CONCAT_WS(CHAR(13 using utf8), '8.0',
 
 insert into questao values(1, 'Olá mundo', 'Faça um programa que imprima "Ola mundo"','Fácil', 10,'Sequência');
 insert into exemploQuestao values(1,null,CONCAT_WS(CHAR(13 using utf8), 'Ola mundo', ''),1);
-
-select * from pergunta;
-select * from alternativa;
 
 insert into pergunta(enunciado, codigo, resposta, assunto) values('O que o código abaixo retorna?', 'printf("Ola mundo")', 'Ola mundo', 'Sequência');
 
@@ -442,3 +440,4 @@ insert into conquista(pontuacao, titulo, descricao) values (1000, 'Solucionador 
 insert into conquista(pontuacao, titulo, descricao) values (1000, 'Sherlock Holmes', 'Resolva 10 tabelas verdade');
 insert into conquista(pontuacao, titulo, descricao) values (1000, 'Viciado em quiz', 'Resolva 10 quizzes');
 insert into conquista(pontuacao, titulo, descricao) values (1000, 'Nível Einstein', 'Resolva uma tabela verdade nível muito difícil');
+

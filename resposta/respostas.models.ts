@@ -6,7 +6,7 @@ export default class Resposta{
 
     static insert(connection, obj) {
 
-        const query = `INSERT INTO respostaquestao
+        let query = `INSERT INTO respostaquestao
         (codigo, idQuestao, idUsuario,dataEnvio, correto, roleta) VALUES(
         '${obj.xml}', 
         ${obj.idQuestao}, 
@@ -21,7 +21,15 @@ export default class Resposta{
                     console.log(err);
                     reject(err);
                 }       
-                
+                query = `select * from respostaquestao where idQuestao=${obj.idQuestao} and  idusuario=${obj.idUsuario};`
+                connection.query(query, (err, result) => {
+                    if(result.length == 1){
+                        query = `update usuario set pontuacao=pontuacao+${obj.pontuacao} where id= ${obj.idUsuario}`
+                        connection.query(query, (err, result) => {
+                            console.log(err)
+                        })
+                    }
+                })
                 resolve(result.insertId);
 
             });
@@ -69,10 +77,15 @@ export default class Resposta{
                             console.log(err);
                             reject(err);
                         }
+                        
                         resolve(result.insertId);
                     });
                 });
 
+                let query = `update usuario set pontuacao=pontuacao+${acertos/total*100} where  id=${obj.idUsuario};`
+                connection.query(query, (err, result) => {
+                    
+                })
               
             });
             

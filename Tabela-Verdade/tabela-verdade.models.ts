@@ -42,6 +42,20 @@ export default class conquista {
                     console.log(err);
                     reject(err);
                 }
+                let query = `select * from tabela_verdade_usuario where idusuario=${obj.idUsuario} and idquestao=${obj.idQuestao}`
+                
+                connection.query(query, (err, result) => {
+                    if(result.length == 1){
+                        console.log(obj.pontuacao)
+                        query = `update usuario set pontuacao = pontuacao+${obj.pontuacao}`
+                        connection.query(query, (err, result) => {
+                            console.log(err)
+                        })
+                    }
+                })
+                
+                
+                
                 resolve(result.insertId)
             });
         });
