@@ -125,14 +125,14 @@ export default class Resposta{
         })
     }
     static getGabarito(id){
-        const query = `select * from exemploQuestao where idQuestao=${id}`;
+        const query = `select * from questao where id=${id}`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if(err){
                     console.log(err)
                     reject(err)
                 }
-                resolve(result)
+                resolve(result[0])
             })
         })
     }

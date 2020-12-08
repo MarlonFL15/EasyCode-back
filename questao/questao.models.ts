@@ -1,4 +1,6 @@
 import connection from '../common/bd/connection'
+const fs = require('fs')
+const path = require('path')
 
 export default class Questao {
     static index(connection) {
@@ -16,14 +18,14 @@ export default class Questao {
             connection.query(query, (err, result) => {
                 if (err) reject(err);
                 else{
-                    const questao = result[0]
-                    
-                    const query = `SELECT * FROM exemploQuestao WHERE idQuestao = ${id};`;
-                    connection.query(query, (err, result) => {
-                        questao.exemplos = result
-
-                        resolve(questao)
-                    })
+                    const saida = fs.readFileSync(path.join(process.cwd(), `\\Gabarito\\${id}\\out1.txt`), 'utf-8')
+                    const entrada = fs.readFileSync(path.join(process.cwd(), `\\Gabarito\\${id}\\in1.txt`), 'utf-8')
+                  
+                    result[0].exemplos = {
+                        entrada:entrada,
+                        saida: saida
+                    }
+                    resolve(result[0])
                 }
                 
             });

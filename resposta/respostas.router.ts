@@ -55,11 +55,11 @@ class RespostaRouter extends Router{
         application.post('/submit', (req,resp,next)=>{
             Resposta.getGabarito(req.body.idQuestao).then(response => {
                 const code = req.body.code
+                
                 Runner.judge(response, code).then(response => {
                     Resposta.insert(connection, {...req.body, correto:response.result}).then(r => {
                         Conquista.checkConquistasQuestoes(connection, req.body.idQuestao, req.body.idUsuario, r).then(r => {    
-                            console.log('valor do r: ')
-                            console.log(r)
+                        
                             resp.json({result:response.result, conquista:r})
                             return next()
                         })
