@@ -52,6 +52,7 @@ export default class Resposta{
     static sendQuiz(connection, obj){
 
         return new Promise((resolve, reject) => {
+            console.log(obj)
             let total = 0
             let acertos = 0
             Object.values(obj.respostas).map(e => {
@@ -59,7 +60,7 @@ export default class Resposta{
                 if(e.correto)
                     acertos+=1
             })
-            const query = `insert into form(idUsuario, assunto, dataCriacao, percentual) values(${obj.idUsuario}, '${obj.assunto}', NOW(), ${acertos/total*100})`;
+            const query = `insert into form(idUsuario, assunto, dataCriacao, percentual) values(${obj.idUsuario}, '${obj.assunto}', NOW(), ${obj.percentual})`;
            
             connection.query(query, (err, result) => {
                 if (err) {
