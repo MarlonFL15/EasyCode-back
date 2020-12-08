@@ -43,6 +43,15 @@ class RespostaRouter extends Router{
                 return next()
             })
         }),
+        application.get('/getTabelasByUser/:id', (req,resp,next)=>{
+            Resposta.getTabelasVerdadeByUser(connection, req.params.id).then(result=>{
+                resp.json(result)
+                return next()
+            }).catch(e => {
+                resp.json(e)
+                return next()
+            })
+        }),
         application.get('/getQuizByUser/:id', (req,resp,next)=>{
             Resposta.getQuizByUser(connection, req.params.id).then(result=>{
                 resp.json(result)

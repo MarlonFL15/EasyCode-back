@@ -93,6 +93,22 @@ export default class Resposta{
 
         })
     }
+
+    static getTabelasVerdadeByUser(connection, id){
+        const query = `
+        select t.nome, t.nivel,  DATE_FORMAT(tu.dataresposta, "%Y-%m-%d %H:%i:%s" ) as datacriacao  from tabela_verdade t inner join tabela_verdade_usuario tu on t.id = tu.idquestao
+        where tu.idusuario=${id} order by tu.dataresposta desc;
+        `
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, result) => {
+                if(err){
+                    console.log(err)
+                    reject(err)
+                }
+                resolve(result)
+            })
+        })
+    }
     static getQuestoesByUser(connection, id){
         const query = `select q.assunto, r.id as id, 1 as tipo, r.correto, DATE_FORMAT(r.dataenvio, "%Y-%m-%d %H:%i:%s" ) as datacriacao, q.titulo
         from respostaquestao r
@@ -109,11 +125,14 @@ export default class Resposta{
         })
     }
     static getQuizByUser(connection, id){
-        const query = `select f.id as id, 2 as tipo, count(*) as questoes, sum(correto) as certas, DATE_FORMAT(f.datacriacao, "%Y-%m-%d %H:%i:%s" ) as datacriacao, f.assunto
-        from form_pergunta 
-        inner join form f on f.id=idform 
-        where f.idusuario=${id} group by idForm 
-        order by datacriacao desc;`
+        const query = `select 2 as tipo, q.assunto, q.percentual, DATE_FORMAT(q.datacriacao, "%Y-%m-%d %H:%i:%s" ) as datacriacao  from form q
+        where q.idusuario=${id};`
+        // const query = `
+        // select f.id as id, 2 as tipo, count(*) as questoes, sum(correto) as certas, DATE_FORMAT(f.datacriacao, "%Y-%m-%d %H:%i:%s" ) as datacriacao, f.assunto
+        // from form_pergunta 
+        // inner join form f on f.id=idform 
+        // where f.idusuario=${id} group by idForm 
+        // order by datacriacao desc;`
         //const query = `select * from respostaQuestao where idUsuario=${id}`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {

@@ -7,8 +7,8 @@ import { NodeBaseExport } from 'readable-stream'
 class QuestaoRouter extends Router{
     applyRoutes(application: restify.Server){
         
-        application.get('/perguntas', (req,resp,next)=>{
-            Pergunta.index(connection).then(result=>{
+        application.get('/perguntas/:id', (req,resp,next)=>{
+            Pergunta.index(connection, req.params.id).then(result=>{
                 resp.json(result)
                 return next()
             }).catch(e => {
