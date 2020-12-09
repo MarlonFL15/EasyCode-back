@@ -52,7 +52,7 @@ export default class Resposta{
     static sendQuiz(connection, obj){
 
         return new Promise((resolve, reject) => {
-            console.log(obj)
+            
             let total = 0
             let acertos = 0
             Object.values(obj.respostas).map(e => {
@@ -68,21 +68,7 @@ export default class Resposta{
                     reject(err);
                 }
                 let idForm = result.insertId
-
-                obj.respostas.forEach(element => {
-                    let query = `insert into form_pergunta(idPergunta, idForm, respostausuario, correto) values
-                    (${element.id}, ${idForm}, '${element.respostaUsuario}', ${element.correto})`
-                    
-                    connection.query(query, (err, result1) => {
-                        if (err) {
-                            console.log(err);
-                            reject(err);
-                        }
-                        
-                        resolve(result.insertId);
-                    });
-                });
-
+                resolve(result.insertId);
                 let query = `update usuario set pontuacao=pontuacao+${acertos/total*100} where  id=${obj.idUsuario};`
                 connection.query(query, (err, result) => {
                     

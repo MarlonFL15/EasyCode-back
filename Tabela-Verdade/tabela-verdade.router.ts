@@ -25,7 +25,6 @@ class TabelaRouter extends Router{
             })
         })
         application.post('/tabela-verdade', (req,resp,next)=>{
-            console.log(req.body)
             Tabela.insert(connection, req.body).then(result=>{
                 Conquista.checkConquistasTabelaVerdade(connection, result, req.body.idUsuario).then(e => {
                     

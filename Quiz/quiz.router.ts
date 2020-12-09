@@ -35,7 +35,18 @@ class PerguntaRouter extends Router{
                 return next()
             })
         })
-
+        application.get('/getHistoricByAssunto', (req,resp,next)=>{
+            console.log("aaaa")
+            Pergunta.graficoByAssunto(connection,req.query.idUsuario, req.query.assunto).then(response =>{
+                console.log(response)
+                resp.json(response)
+                return next()
+            }).catch(e => {
+                console.log(e)
+                resp.json(e)
+                return next()
+            })
+        })
         
     }
 }

@@ -84,7 +84,7 @@ class RespostaRouter extends Router{
         application.post('/sendQuiz', (req, resp, next) => {
             Resposta.sendQuiz(connection, req.body).then(response => {
                 Conquista.checkConquistasQuiz(connection, response, req.body.idUsuario).then(r => {
-                    console.log(r)
+                    
                     resp.json({conquista: r})
                     return next()
                 }).catch(e => {
@@ -94,6 +94,7 @@ class RespostaRouter extends Router{
                 })
 
             }).catch(e => {
+                console.log(e)
                 resp.json(e)
                 return next()
             })

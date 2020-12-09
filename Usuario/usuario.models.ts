@@ -9,13 +9,12 @@ export default class usuario {
                     console.log(err);
                     reject(err);
                 }
-                console.log('mds do ceu')
                 resolve(result);
             });
         });
     }
     static login(connection,usuario) {
-        console.log(usuario)
+       
         const query = `SELECT * FROM usuario WHERE email='${usuario.email}' and senha='${usuario.senha}';`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
@@ -41,7 +40,7 @@ export default class usuario {
             '${usuario.nome}', 
             ${foto} ,
             ${usuario.google})`;
-        console.log(usuario)
+        
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {

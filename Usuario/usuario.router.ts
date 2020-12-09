@@ -41,8 +41,7 @@ class UsuarioRouter extends Router{
         }),
         application.post('/getUserEmail', (req,resp,next)=>{
             Usuario.getUserByEmail(connection,req.body).then(result=>{
-                console.log('valor do result: ')
-                console.log(result)
+            
                 if(result == 0){
                     resp.json({result:false})
                 }
@@ -68,7 +67,7 @@ class UsuarioRouter extends Router{
         })
         application.post('/getUserGoogle', (req,resp,next)=>{
             Usuario.getUserByGoogle(connection,req.body).then(result =>{
-                // console.log(typeof(result))
+                
                 let list =  <Array<any>>result;
                 let leng:number = list.length
                 if(leng == 0){

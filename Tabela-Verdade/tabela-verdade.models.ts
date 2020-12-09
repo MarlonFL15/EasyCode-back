@@ -47,7 +47,6 @@ export default class conquista {
                 
                 connection.query(query, (err, result) => {
                     if(result.length == 1){
-                        console.log(obj.pontuacao)
                         query = `update usuario set pontuacao = pontuacao+${obj.pontuacao}`
                         connection.query(query, (err, result) => {
                             console.log(err)

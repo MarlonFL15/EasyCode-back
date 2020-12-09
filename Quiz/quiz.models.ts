@@ -21,7 +21,7 @@ export default class Pergunta {
         where f1.idusuario=${id}
         group by cast(f1.datacriacao as date)
         order by cast(f1.datacriacao as date) asc limit 7;`
-        console.log(query)
+       
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) reject(err);
@@ -54,6 +54,31 @@ export default class Pergunta {
         });
     }
 
+    static graficoByAssunto(connection, id, assunto){
+        return new Promise((resolve, reject) => {
+            const query = `select percentual, DATE_FORMAT(datacriacao, "%d/%m" ) as datacriacao from form where assunto='${assunto}'and idusuario=${id} order by id asc`
+            console.log(query)
+            connection.query(query, (err, result) => {
+                if(err){
+                    console.log(err)
+                    reject(err)
+                }
+                else{
+                    const value = []
+                    const data = []
+                    console.log(result)
+                    result.forEach(element => {
+                        value.push(element.percentual)
+                        data.push(element.datacriacao)
+                    });
+                    resolve({
+                        values: value,
+                        date: data
+                    })
+                }
+            })
+        })
+    }
     static getQuizByAssunto(connection, assunto, idUsuario) {
         return new Promise((resolve, reject) => {
 

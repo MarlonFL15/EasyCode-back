@@ -4,8 +4,6 @@ const path = require('path')
 
 export default class Questao {
     static index(connection, id) {
-        console.log('aaaaaaaaaaaaa')
-        console.log(id)
         const query = `select p.*, tu.idusuario as feito from questao p left join (select * from respostaquestao where idusuario=${id}) tu on tu.idquestao = p.id group by p.id;`;
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {

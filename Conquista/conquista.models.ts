@@ -38,8 +38,7 @@ export default class conquista {
                 }
                 let query = `select * from conquista where id=${obj.idConquista};`
                 connection.query(query, (err, result) => {
-                    console.log(query)
-                    console.log(result)
+                    
                     const pontos = result[0].pontuacao
                     query = `update usuario set pontuacao=pontuacao+${pontos} where id=${obj.idUsuario};`
                     connection.query(query, (err, result) => {
@@ -69,7 +68,7 @@ export default class conquista {
     static checkConquista(connection, idUsuario, idConquista) {
 
         const query=`select * from conquistausuario where idUsuario=${idUsuario} and idConquista=${idConquista}`
-        console.log(query)
+        
         return new Promise((resolve, reject) => {
             connection.query(query, (err, result) => {
                 if (err) {
@@ -134,7 +133,7 @@ export default class conquista {
 
         return new Promise((resolve, reject) =>{
             connection.query(query.join(''), (err, results) => {
-                console.log(err)
+               
                 if(results[0].length == 1)
                     conquistas.push(2)
                 if(results[0].length == 10)
@@ -159,9 +158,7 @@ export default class conquista {
         
         return new Promise((resolve, reject) =>{
             connection.query(query.join(''), (err, results) => {
-                //console.log(results)
-                /**Verificando a primeira conquista */
-                console.log(results[0].length)
+               
                 if(results[0].length == 1)
                     conquistas.push(4)
                 

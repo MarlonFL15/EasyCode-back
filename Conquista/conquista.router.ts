@@ -50,7 +50,6 @@ class ConquistaRouter extends Router{
                 resp.json(e)
                 return next()
             }).catch(c => {
-                console.log('opa')
                 resp.json(c)
                 return next()
             })
