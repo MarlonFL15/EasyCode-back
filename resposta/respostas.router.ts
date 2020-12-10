@@ -69,7 +69,7 @@ class RespostaRouter extends Router{
                     Resposta.insert(connection, {...req.body, correto:response.result}).then(r => {
                         Conquista.checkConquistasQuestoes(connection, req.body.idQuestao, req.body.idUsuario, r).then(r => {    
                         
-                            resp.json({result:response.result, conquista:r})
+                            resp.json({result:response.result, conquista:r, saida: response.saidas})
                             return next()
                         })
                     })

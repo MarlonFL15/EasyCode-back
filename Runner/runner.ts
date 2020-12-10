@@ -23,7 +23,7 @@ export default class Runner {
         results.forEach(element => {
           result = result && element.index
         });
-        resolve({result:result})
+        resolve({result:result, saidas: results})
       });
     
     })
@@ -36,7 +36,11 @@ export default class Runner {
           var child;
           var exec = require('child_process').exec;
           exec(`python file.py < ${path.join(process.cwd(), `\\Gabarito\\${id}\\in${index}.txt`)}`, function(error, stdout, stderr){
-            resolve({index:stdout===resp})
+            resolve({
+              index:stdout===resp,
+              esperado: resp,
+              saida: stdout
+            })
           });
 
         })
